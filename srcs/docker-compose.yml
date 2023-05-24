@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  nginx:
+  my-nginx:
     build: requirements/nginx
-    image: nginx
+    image: my-nginx
     ports:
       - 443:443
     networks:
