@@ -10,6 +10,16 @@ services:
       - inception
     restart: always
 
+  my-mariadb:
+    build: requirements/mariadb
+    image: my-mariadb
+    ports:
+      - 3036:3036
+    networks:
+      - inception
+    env_file:
+      - .env
+    restart: always
+
 networks:
   inception:
-  
