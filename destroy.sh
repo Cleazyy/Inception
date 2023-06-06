@@ -1,5 +1,4 @@
 #!/bin/sh
-
 docker stop $(docker ps -qa) 2>/dev/null
 docker rm $(docker ps -qa) 2>/dev/null
 docker rmi -f $(docker images -qa) 2>/dev/null

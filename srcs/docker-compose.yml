@@ -3,23 +3,41 @@ version: '3'
 services:
   my-nginx:
     build: requirements/nginx
+    container_name: my-nginx
     image: my-nginx
     ports:
       - 443:443
     networks:
-      - inception
+      - inception_network
     restart: always
 
   my-mariadb:
     build: requirements/mariadb
+    container_name: my-mariadb
     image: my-mariadb
     ports:
       - 3036:3036
     networks:
-      - inception
+      - inception_network
     env_file:
       - .env
+    volumes:
+      - db_data:/var/lib/mysql
     restart: always
 
 networks:
-  inception:
+  inception_network:
+
+volumes:
+  wp_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/fluchten/data/wp
+  db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/fluchten/data/db
