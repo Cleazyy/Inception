@@ -17,7 +17,7 @@ RUN mkdir -p /etc/nginx/ssl
 	# -newkey rsa:2048 : generates a new 2048-bit RSA key for the certificate
 	# -subj : specifies the subject of the certificate
 	# -keyout : indicates the path where the private key will be stored
-	# -keyout : indicates the path where the certificate will be stored
+	# -out : indicates the path where the certificate will be stored
 RUN openssl req -x509 \
 				-sha256 \
 				-days 356 \
