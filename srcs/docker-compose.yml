@@ -1,20 +1,20 @@
 version: '3'
 
 services:
-  my-nginx:
+  nginx:
     build: requirements/nginx
-    container_name: my-nginx
-    image: my-nginx
+    container_name: nginx
+    image: nginx
     ports:
       - 443:443
     networks:
       - inception_network
     restart: always
 
-  my-mariadb:
+  mariadb:
     build: requirements/mariadb
-    container_name: my-mariadb
-    image: my-mariadb
+    container_name: mariadb
+    image: mariadb
     ports:
       - 3036:3036
     networks:

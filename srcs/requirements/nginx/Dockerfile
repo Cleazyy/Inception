@@ -28,7 +28,7 @@ RUN openssl req -x509 \
 				-out /etc/nginx/ssl/fluchten.crt
 
 # Copies the configuration file from the local directory to the Docker image directory
-COPY conf/my-nginx.conf /etc/nginx/conf.d
+COPY conf/nginx.conf /etc/nginx/conf.d
 
 # Exposes port 443 for HTTPS connections
 EXPOSE 443

@@ -1,6 +1,9 @@
 # Starts the MariaDB service
 service mysql start;
 
+# Waits for the MariaDB service to start
+sleep 5;
+
 # Creates a database and a user
 mysql -e "CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;"
 mysql -e "CREATE USER IF NOT EXISTS \`${MYSQL_USER}\`@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';"
@@ -9,7 +12,7 @@ mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
 mysql -e "FLUSH PRIVILEGES;"
 
 # Stop the MariaDB service
-service mysql stop;
+mysqladmin -u root -p$MYSQL_ROOT_PASSWORD shutdown;
 
 # Runs the mysqld_safe process to start the MariaDB server securely
 exec mysqld_safe
