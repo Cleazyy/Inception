@@ -1,31 +1,19 @@
 # Specifies the base image to be used to build the Docker image
-FROM debian:buster
+FROM alpine:3.16
 
-# Updates available and installed packages and installs ???????? packages
-RUN apt-get -y update && \
-	apt-get -y upgrade && \
-	apt-get -y install \
-		wget \
-		mariadb-server \
-		mariadb-client \
-		php-cgi \
-		php-common \
-		php-fpm \
-		php-pear \
-		php-mbstring \
-		php-zip \
-		php-net-socket \
-		php-gd \
-		php-xml-util \
-		php-gettext \
-		php-mysql \
-		php-bcmath
+# Install required packages
+RUN apk update && apk upgrade && \
+    apk add php8 php8-fpm php8-mysqli php8-phar php8-json php8-mbstring mariadb-client
 
-# Installation of wordpress
-WORKDIR /var/www
-RUN wget https://wordpress.org/wordpress-6.1.tar.gz && \
-	tar -xzvf wordpress-6.1.tar.gz && \
-	rm wordpress-6.1.tar.gz
+# Copy and give permissions to the startup script
+COPY ./tools/wordpress.sh /home/wordpress.sh
+RUN chmod +x /home/wordpress.sh
 
 # Exposes port 9000
 EXPOSE 9000
+
+# Sets the working directory to home
+WORKDIR /home
+
+# Sets the entrypoint to sh script
+ENTRYPOINT ["sh", "wordpress.sh"]

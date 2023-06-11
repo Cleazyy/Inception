@@ -1,19 +1,19 @@
 # Specifies the base image to be used to build the Docker image
-FROM debian:buster
+FROM alpine:3.17
 
 # Updates available and installed packages and installs MariaDB packages
-RUN apt-get -y update && \
-	apt-get -y upgrade && \
-	apt-get -y install mariadb-server
+RUN apk update && \
+    apk add mariadb mariadb-client
 
-# Copie the custom MySQL config file
-COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
-
-# Copie the startup script
-COPY tools/start.sh /
+# Copy and give permissions to the startup script
+COPY ./tools/database.sh /home/database.sh
+RUN chmod +x /home/database.sh
 
 # Exposes port 3036
 EXPOSE 3036
 
-# Sets the entrypoint to start.sh script
-ENTRYPOINT ["sh", "start.sh"]
+# Sets the working directory to home
+WORKDIR /home
+
+# Sets the entrypoint to sh script
+ENTRYPOINT ["sh", "database.sh"]

@@ -1,10 +1,10 @@
 # Specifies the base image to be used to build the Docker image
-FROM debian:buster
+FROM alpine:3.17
 
 # Updates available and installed packages and installs NGINX and OpenSSL packages
-RUN apt-get -y update && \
-	apt-get -y upgrade && \
-	apt-get -y install nginx openssl
+RUN apk update && \
+	apk add nginx openssl && \
+	mkdir -p /run/nginx
 
 # Creates a directory for storing SSL certificates used by NGINX
 RUN mkdir -p /etc/nginx/ssl
@@ -28,10 +28,10 @@ RUN openssl req -x509 \
 				-out /etc/nginx/ssl/fluchten.crt
 
 # Copies the configuration file from the local directory to the Docker image directory
-COPY conf/nginx.conf /etc/nginx/conf.d
+COPY ./conf/nginx.conf /etc/nginx/http.d/default.conf
 
 # Exposes port 443 for HTTPS connections
 EXPOSE 443
 
-# Start the container in daemon mode so that it runs in the background
+# Starts the container in daemon mode so that it runs in the background
 CMD ["nginx", "-g", "daemon off;"]
