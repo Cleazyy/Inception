@@ -13,7 +13,7 @@ services:
     volumes:
       - mariadb:/var/lib/mysql
     networks:
-      - docker-network
+      - inception-network
     restart: always
 
   nginx:
@@ -28,7 +28,7 @@ services:
     volumes:
       - wordpress:/var/www/html
     networks:
-      - docker-network
+      - inception-network
     restart: always
 
   wordpress:
@@ -45,11 +45,12 @@ services:
     volumes:
       - wordpress:/var/www/html
     networks:
-      - docker-network
+      - inception-network
     restart: always
 
 networks:
-  docker-network:
+  inception-network:
+    name: inception-network
     driver: bridge
 
 volumes:
