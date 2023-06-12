@@ -16,6 +16,9 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	# Downloads wordpress
 	wp core download
 
+	# Pauses the system until wordpress is installed
+	sleep 5;
+
 	# Create the wordpress configuration file
 	wp config create \
 		--dbname="${MYSQL_DATABASE}" \

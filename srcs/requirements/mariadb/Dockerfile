@@ -1,5 +1,5 @@
 # Specifies the base image to be used to build the Docker image
-FROM alpine:3.17
+FROM alpine:3.16
 
 # Updates available and installed packages and installs MariaDB packages
 RUN apk update && \
