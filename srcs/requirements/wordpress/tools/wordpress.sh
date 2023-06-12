@@ -6,7 +6,7 @@ fi
 
 if [ ! -f /var/www/html/wp-config.php ]; then
 	# Allows php to listen on all available interfaces
-	sed -i 's#listen = 127.0.0.1:9000#listen = 0.0.0.0:9000#' /etc/php8/php-fpm.d/www.conf
+	sed -i 's#listen = 127.0.0.1:9000#listen = 0.0.0.0:9000#' /etc/php81/php-fpm.d/www.conf
 
 	# Downloads wordpress-cli
 	wget -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
@@ -43,4 +43,4 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 fi
 
 # Executes php
-php-fpm8 -F -R
+php-fpm81 -F -R

@@ -1,9 +1,9 @@
 # Specifies the base image to be used to build the Docker image
-FROM alpine:3.16
+FROM alpine:3.17
 
 # Install required packages
 RUN apk update && apk upgrade && \
-    apk add php8 php8-fpm php8-mysqli php8-phar php8-json php8-mbstring mariadb-client
+    apk add php81 php81-fpm php81-mysqli php81-phar php81-json php81-mbstring mariadb-client
 
 # Copy and give permissions to the startup script
 COPY ./tools/wordpress.sh /home/wordpress.sh
