@@ -16,4 +16,4 @@ down:
 destroy:
 	@sudo sh ./srcs/destroy.sh
 
-.PHONY: all up
+.PHONY: all prepare up build down destroy
