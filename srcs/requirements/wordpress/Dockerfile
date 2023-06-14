@@ -1,7 +1,7 @@
 # Specifies the base image to be used to build the Docker image
 FROM alpine:3.17
 
-# Install required packages
+# Installs the required packages
 RUN apk update && apk upgrade && \
     apk add php81 php81-fpm php81-mysqli php81-phar php81-json php81-mbstring mariadb-client
 

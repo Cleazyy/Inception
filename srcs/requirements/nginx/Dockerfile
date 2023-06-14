@@ -1,7 +1,7 @@
 # Specifies the base image to be used to build the Docker image
 FROM alpine:3.17
 
-# Updates available and installed packages and installs NGINX and OpenSSL packages
+# Installs the required packages
 RUN apk update && \
 	apk add nginx openssl && \
 	mkdir -p /run/nginx
